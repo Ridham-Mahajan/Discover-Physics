@@ -1,0 +1,45 @@
+// ===== Physics Constants, Particle Data, and Info Content =====
+window.PhysicsData = {
+  particles: {
+    proton: { name:'Proton', symbol:'p', mass:0.938272, charge:1, spin:0.5, baryon:1, color:'#f97316', isComposite:true, pdg:2212 },
+    neutron: { name:'Neutron', symbol:'n', mass:0.939565, charge:0, spin:0.5, baryon:1, color:'#94a3b8', isComposite:true, pdg:2112 },
+    electron: { name:'Electron', symbol:'e⁻', mass:0.000511, charge:-1, spin:0.5, baryon:0, color:'#3b82f6', isComposite:false, pdg:11 },
+    positron: { name:'Positron', symbol:'e⁺', mass:0.000511, charge:1, spin:0.5, baryon:0, color:'#f43f5e', isComposite:false, pdg:-11 },
+    lead: { name:'Lead-208', symbol:'²⁰⁸Pb', mass:193.729, charge:82, spin:0, baryon:208, color:'#a855f7', isComposite:true, pdg:1000822080 },
+    gold: { name:'Gold-197', symbol:'¹⁹⁷Au', mass:183.473, charge:79, spin:1.5, baryon:197, color:'#eab308', isComposite:true, pdg:1000791970 },
+  },
+  produced: {
+    muon: { name:'Muon', symbol:'μ⁻', mass:0.10566, charge:-1, color:'#22c55e', lifetime:2.2e-6 },
+    antimuon: { name:'Antimuon', symbol:'μ⁺', mass:0.10566, charge:1, color:'#22c55e', lifetime:2.2e-6 },
+    pion_plus: { name:'Pion+', symbol:'π⁺', mass:0.13957, charge:1, color:'#f97316', lifetime:2.6e-8 },
+    pion_minus: { name:'Pion-', symbol:'π⁻', mass:0.13957, charge:-1, color:'#f97316', lifetime:2.6e-8 },
+    pion_zero: { name:'Pion0', symbol:'π⁰', mass:0.13498, charge:0, color:'#fbbf24', lifetime:8.5e-17 },
+    kaon_plus: { name:'Kaon+', symbol:'K⁺', mass:0.49368, charge:1, color:'#a78bfa', lifetime:1.24e-8 },
+    photon: { name:'Photon', symbol:'γ', mass:0, charge:0, color:'#fbbf24', lifetime:Infinity },
+    z_boson: { name:'Z Boson', symbol:'Z⁰', mass:91.1876, charge:0, color:'#06b6d4', lifetime:3e-25 },
+    w_plus: { name:'W+ Boson', symbol:'W⁺', mass:80.379, charge:1, color:'#8b5cf6', lifetime:3e-25 },
+    w_minus: { name:'W- Boson', symbol:'W⁻', mass:80.379, charge:-1, color:'#8b5cf6', lifetime:3e-25 },
+    higgs: { name:'Higgs Boson', symbol:'H⁰', mass:125.1, charge:0, color:'#ec4899', lifetime:1.56e-22 },
+    top: { name:'Top Quark', symbol:'t', mass:173.0, charge:0.667, color:'#ef4444', lifetime:5e-25 },
+    neutrino_e: { name:'Electron Neutrino', symbol:'νₑ', mass:0, charge:0, color:'#64748b', lifetime:Infinity },
+    neutrino_mu: { name:'Muon Neutrino', symbol:'ν_μ', mass:0, charge:0, color:'#64748b', lifetime:Infinity },
+  },
+  detectors: {
+    CMS: { name:'CMS', bField:3.8, length:21.6, diameter:14.6, weight:14000, trackerRes:0.015, ecalRes:0.03, hcalRes:0.10, muonLayers:4, etaMax:2.5,
+      description:'Compact Muon Solenoid — uses the strongest solenoid magnet ever built for a particle detector (3.8T). Known for excellent muon detection and a high-resolution crystal ECAL.' },
+    ATLAS: { name:'ATLAS', bField:2.0, length:46, diameter:25, weight:7000, trackerRes:0.02, ecalRes:0.025, hcalRes:0.08, muonLayers:3, etaMax:2.7,
+      description:'A Toroidal LHC ApparatuS — the largest particle detector ever built. Uses a unique toroidal magnet system for muon spectroscopy and liquid argon calorimetry.' },
+  },
+  infoContent: {
+    'collision-setup': { title:'Collision Setup', body:'<p>Configure the fundamental parameters of your particle collision experiment. The collision type determines which particles are accelerated and smashed together.</p><h3>At the Real LHC</h3><p>The LHC accelerates two counter-rotating beams through a 27 km ring using 1,232 superconducting dipole magnets cooled to 1.9 K (colder than outer space).</p>' },
+    'collision-type': { title:'Collision Types', body:'<h3>Proton-Proton (p-p)</h3><p>The LHC\'s primary mode. Protons are composite particles made of quarks and gluons, leading to complex multi-parton interactions.</p><div class="formula">√s = 13.6 TeV (Run 3)</div><h3>Lead-Lead (Pb-Pb)</h3><p>Heavy-ion collisions create Quark-Gluon Plasma (QGP) — matter as it existed microseconds after the Big Bang.</p><h3>Electron-Positron (e⁺e⁻)</h3><p>Clean collisions between fundamental particles. All energy is available for new particle production.</p><div class="formula">e⁺e⁻ → γ*/Z⁰ → ff̄</div>' },
+    'beam-particle': { title:'Beam Particles', body:'<p>Select the particle species for each beam. Different particles probe different aspects of fundamental physics.</p><ul><li><strong>Protons:</strong> Composite (uud quarks + gluons). Most versatile for discovery physics.</li><li><strong>Electrons/Positrons:</strong> Point-like leptons. Cleaner but lower energy (synchrotron radiation limits).</li><li><strong>Heavy ions:</strong> Nuclei with many protons/neutrons. Used for QGP studies.</li></ul>' },
+    'beam-params': { title:'Beam Parameters', body:'<p>These parameters control the beam properties and determine the rate and characteristics of collisions.</p>' },
+    'com-energy': { title:'Center-of-Mass Energy (√s)', body:'<p>The total energy available in the collision\'s center-of-mass frame. This determines which particles can be created.</p><div class="formula">√s = 2·E_beam (for symmetric collisions)</div><h3>Einstein\'s E = mc²</h3><p>The energy can convert into mass via E = mc². A particle of mass m requires at least √s ≥ mc² to be produced.</p><h3>Key Thresholds</h3><ul><li>Z boson: 91.2 GeV</li><li>Higgs boson: 125.1 GeV</li><li>Top quark pair: 346 GeV</li></ul>' },
+    'luminosity': { title:'Luminosity (L)', body:'<p>Luminosity measures the collision rate capability of the accelerator. Higher luminosity = more collisions per second = more data.</p><div class="formula">N_events = L × σ × t</div><p>where σ is the cross-section and t is time.</p><h3>Integrated Luminosity</h3><p>Total data collected is measured in inverse femtobarns (fb⁻¹). The LHC has delivered over 300 fb⁻¹ in Run 2+3.</p>' },
+    'beam-spread': { title:'Beam Spread (σ)', body:'<p>The transverse size of the beam at the interaction point. Smaller beams = more precise collisions = higher luminosity.</p><div class="formula">L ∝ N₁·N₂·f / (4π·σ_x·σ_y)</div><p>At the LHC, beams are squeezed to ~3.5 μm at the interaction point — thinner than a human hair by 20×.</p>' },
+    'impact-param': { title:'Impact Parameter (b)', body:'<p>The perpendicular distance between the centers of the two colliding particles/nuclei.</p><div class="formula">b = 0: head-on collision (central)<br>b > R₁+R₂: no nuclear overlap (ultra-peripheral)</div><p>For heavy-ion collisions, the impact parameter determines the collision centrality and the shape of the overlap region.</p>' },
+    'detector': { title:'Particle Detectors', body:'<p>Detectors surround the collision point in concentric layers, each designed to measure different particle properties.</p><h3>Layer Structure (inside → out)</h3><ul><li><strong>Tracker:</strong> Measures trajectories of charged particles in magnetic field → momentum</li><li><strong>ECAL:</strong> Electromagnetic calorimeter absorbs electrons, positrons, photons → energy</li><li><strong>HCAL:</strong> Hadronic calorimeter absorbs hadrons (protons, pions, etc.) → energy</li><li><strong>Muon System:</strong> Only muons (and neutrinos) penetrate this far</li></ul>' },
+    'anomaly': { title:'Anomaly Detection', body:'<p>The anomaly detector scans your collision data for statistically significant deviations from Standard Model predictions.</p><h3>How It Works</h3><p>It looks for unexpected bumps in invariant mass distributions, unusual event topologies, and excess production rates that could signal new physics beyond the Standard Model.</p><div class="formula">Significance = S / √(S + B)</div><p>where S = signal events, B = background events. A 5σ significance (p < 3×10⁻⁷) is required for discovery.</p>' },
+  }
+};
