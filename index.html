@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discover Physics — LHC Particle Collision Simulator</title>
+  <meta name="description" content="Interactive high-energy particle collision simulator inspired by the CERN Large Hadron Collider. Simulate pp, Pb-Pb, and e+e- collisions with Monte Carlo physics.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="on-home">
+  <div class="grid-overlay"></div>
+
+  <!-- Sidebar Menu -->
+  <button id="sidebar-toggle" title="Menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+  <nav id="sidebar-menu">
+    <a class="sidebar-link active" href="#" data-page="home"><span class="sidebar-icon">🏠</span>Home</a>
+    <a class="sidebar-link" href="#" data-page="simulator"><span class="sidebar-icon">🔬</span>LHC Simulator</a>
+    <a class="sidebar-link" href="https://www.youtube.com/@discoverphysicsyt" target="_blank" rel="noopener"><span class="sidebar-icon">▶️</span>YouTube</a>
+    <a class="sidebar-link" href="https://discoverphysicsyt.blogspot.com/" target="_blank" rel="noopener"><span class="sidebar-icon">📝</span>Blog</a>
+    <a class="sidebar-link" href="#" data-page="projects"><span class="sidebar-icon">🧪</span>Projects</a>
+    <div class="sidebar-divider"></div>
+    <a class="sidebar-link" href="#" data-page="about"><span class="sidebar-icon">👤</span>About Me</a>
+    <a class="sidebar-link" href="#" data-page="contact"><span class="sidebar-icon">✉️</span>Contact</a>
+    <div class="sidebar-footer"><label><input type="checkbox" id="sidebar-autohide" checked> Auto-hide sidebar</label></div>
+  </nav>
+
+  <!-- Platform Header -->
+  <div id="platform-bar">
+    <div class="platform-left">
+      <span class="platform-logo" id="nav-home-btn" style="cursor:pointer">⚛️ Discover Physics</span>
+    </div>
+    <div class="platform-center">
+      <a class="platform-module active" href="#" id="nav-link-home" data-page="home">Home</a>
+      <a class="platform-module" href="#" id="nav-link-lhc" data-page="simulator">LHC Simulator</a>
+      <a class="platform-module" href="https://www.youtube.com/@discoverphysicsyt" target="_blank" rel="noopener">YouTube</a>
+      <a class="platform-module" href="https://discoverphysicsyt.blogspot.com/" target="_blank" rel="noopener">Blog</a>
+      <a class="platform-module" href="#" data-page="projects">Projects</a>
+      <a class="platform-module" href="#" id="nav-link-about" data-page="about">About Me</a>
+      <a class="platform-module" href="#" data-page="contact">Contact</a>
+    </div>
+    <div class="platform-right">
+      <span class="platform-user">by Ridham Mahajan</span>
+    </div>
+  </div>
+
+  <!-- HOME PAGE -->
+  <div id="home-page">
+    <canvas id="particle-canvas"></canvas>
+    <div class="home-hero">
+      <div class="hero-badge">Interactive Physics Simulation Platform</div>
+      <h1>Discover <span class="brand-accent">Physics</span></h1>
+      <p class="tagline">Explore the fundamental laws of nature through interactive, research-grade simulations. From particle collisions at the Large Hadron Collider to quantum phenomena — experience physics like never before.</p>
+    </div>
+    <div class="home-nav">
+      <div class="home-card primary" id="home-card-lhc">
+        <span class="card-badge">Live</span>
+        <span class="card-icon">🔬</span>
+        <div class="card-title">LHC Simulator</div>
+        <div class="card-desc">Simulate pp, Pb–Pb, and e⁺e⁻ collisions with Monte Carlo physics, 3D visualization, and CMS/ATLAS detector models.</div>
+      </div>
+      <a class="home-card" href="https://www.youtube.com/@discoverphysicsyt" target="_blank" rel="noopener">
+        <span class="card-icon">▶️</span>
+        <div class="card-title">YouTube</div>
+        <div class="card-desc">Watch physics explainers, experiment breakdowns, and simulation tutorials.</div>
+      </a>
+      <a class="home-card" href="https://discoverphysicsyt.blogspot.com/" target="_blank" rel="noopener">
+        <span class="card-icon">📝</span>
+        <div class="card-title">Blog</div>
+        <div class="card-desc">Read articles on particle physics, quantum mechanics, experiments, and the science behind the simulator.</div>
+      </a>
+      <div class="home-card" id="home-card-projects" data-page="projects">
+        <span class="card-icon">🧪</span>
+        <div class="card-title">Projects</div>
+        <div class="card-desc">Upcoming: Quantum Field Theory, Astrophysics, Nuclear, and Thermodynamics simulators.</div>
+      </div>
+      <div class="home-card" id="home-card-about" data-page="about">
+        <span class="card-icon">👤</span>
+        <div class="card-title">About Me</div>
+        <div class="card-desc">Learn about the creator and the mission behind Discover Physics.</div>
+      </div>
+      <div class="home-card" id="home-card-contact" data-page="contact">
+        <span class="card-icon">✉️</span>
+        <div class="card-title">Contact</div>
+        <div class="card-desc">ridhammahajan4363@gmail.com<br>Feedback, collaborations, or just to chat about physics!</div>
+      </div>
+    </div>
+    <hr class="home-divider">
+    <div class="home-about" id="contact-section">
+      <div class="about-name">Ridham Mahajan</div>
+      <div class="about-title">Physics Enthusiast · MSc, IIT Mandi</div>
+      <p style="margin-top:16px">Building interactive tools to make advanced physics accessible and engaging. This platform brings research-grade particle collision simulations to your browser — no installation, no PhD required.</p>
+      <p style="margin-top:12px">✉️ <a href="mailto:ridhammahajan4363@gmail.com" style="color:var(--accent)">ridhammahajan4363@gmail.com</a></p>
+    </div>
+    <div class="home-footer">
+      <p>© 2026 Discover Physics · <a href="https://www.youtube.com/@discoverphysicsyt" target="_blank">YouTube</a></p>
+    </div>
+  </div>
+
+  <!-- SIMULATOR PAGE (wraps everything below) -->
+  <div id="simulator-page" class="hidden">
+
+  <!-- Top Navigation Bar -->
+  <nav id="top-nav">
+    <div class="nav-left">
+      <div class="logo">
+        <div class="logo-ring" style="border-color:var(--accent)"></div>
+        <span class="logo-text">LHC<span class="accent">SIM</span></span>
+      </div>
+      <div class="nav-divider"></div>
+      <div class="status-indicator">
+        <span class="pulse-dot"></span>
+        <span id="sim-status">STANDBY</span>
+      </div>
+    </div>
+    <div class="nav-center">
+      <button class="nav-tab active" data-tab="simulate" id="tab-simulate">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        Simulate
+      </button>
+      <button class="nav-tab" data-tab="detector" id="tab-detector">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        Detector
+      </button>
+      <button class="nav-tab" data-tab="analysis" id="tab-analysis">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-10"/></svg>
+        Analysis
+      </button>
+      <button class="nav-tab" data-tab="feynman" id="tab-feynman">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16"/><path d="M4 12c2-4 4-4 6 0s4 4 6 0"/></svg>
+        Feynman
+      </button>
+      <button class="nav-tab" data-tab="education" id="tab-education">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        Learn
+      </button>
+    </div>
+    <div class="nav-right">
+      <button class="icon-btn" id="btn-tour" title="Tour Mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-edu-mode" title="Educational Mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-assistant" title="AI Physics Assistant">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 018 8v2a8 8 0 01-16 0v-2a8 8 0 018-8z"/><path d="M9 11h.01M15 11h.01M9.5 15a3.5 3.5 0 005 0"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-save" title="Save Experiment">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17,21 17,13 7,13 7,21"/><polyline points="7,3 7,8 15,8"/></svg>
+      </button>
+      <div class="event-counter">
+        <span class="counter-label">Events</span>
+        <span class="counter-value" id="event-count">0</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Left Sidebar: Configuration -->
+    <aside id="left-panel" class="panel" style="position:relative">
+      <button class="panel-collapse-btn" id="collapse-left" title="Collapse">◀</button>
+      <div class="panel-section">
+        <h3 class="section-title">
+          Collision Setup
+          <button class="info-btn" data-info="collision-setup">ℹ️</button>
+        </h3>
+        <div class="config-group">
+          <label class="config-label">Collision Type <button class="info-btn" data-info="collision-type">ℹ️</button></label>
+          <div class="btn-group" id="collision-type-group">
+            <button class="btn-option active" data-value="pp">p–p</button>
+            <button class="btn-option" data-value="PbPb">Pb–Pb</button>
+            <button class="btn-option" data-value="ee">e⁺e⁻</button>
+          </div>
+        </div>
+        <div class="config-group">
+          <label class="config-label">Beam 1 <button class="info-btn" data-info="beam-particle">ℹ️</button></label>
+          <select id="beam1-select" class="config-select">
+            <option value="proton" selected>Proton (p)</option>
+            <option value="electron">Electron (e⁻)</option>
+            <option value="positron">Positron (e⁺)</option>
+            <option value="neutron">Neutron (n)</option>
+            <option value="lead">Lead Ion (²⁰⁸Pb)</option>
+            <option value="gold">Gold Ion (¹⁹⁷Au)</option>
+          </select>
+        </div>
+        <div class="config-group">
+          <label class="config-label">Beam 2</label>
+          <select id="beam2-select" class="config-select">
+            <option value="proton" selected>Proton (p)</option>
+            <option value="electron">Electron (e⁻)</option>
+            <option value="positron">Positron (e⁺)</option>
+            <option value="neutron">Neutron (n)</option>
+            <option value="lead">Lead Ion (²⁰⁸Pb)</option>
+            <option value="gold">Gold Ion (¹⁹⁷Au)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">
+          Beam Parameters
+          <button class="info-btn" data-info="beam-params">ℹ️</button>
+        </h3>
+        <div class="config-group">
+          <label class="config-label">
+            Center-of-Mass Energy
+            <button class="info-btn" data-info="com-energy">ℹ️</button>
+            <span class="value-display" id="energy-display">13.6 TeV</span>
+          </label>
+          <input type="range" id="energy-slider" class="config-slider" min="0.1" max="100" step="0.1" value="13.6">
+          <div class="slider-labels"><span>0.1 TeV</span><span>100 TeV</span></div>
+        </div>
+        <div class="config-group">
+          <label class="config-label">
+            Luminosity
+            <button class="info-btn" data-info="luminosity">ℹ️</button>
+            <span class="value-display" id="lumi-display">2.0 × 10³⁴</span>
+          </label>
+          <input type="range" id="lumi-slider" class="config-slider" min="30" max="38" step="0.1" value="34.3">
+          <div class="slider-labels"><span>10³⁰</span><span>10³⁸ cm⁻²s⁻¹</span></div>
+        </div>
+        <div class="config-group">
+          <label class="config-label">
+            Beam Spread (σ)
+            <button class="info-btn" data-info="beam-spread">ℹ️</button>
+            <span class="value-display" id="spread-display">3.5 μm</span>
+          </label>
+          <input type="range" id="spread-slider" class="config-slider" min="0.5" max="50" step="0.5" value="3.5">
+        </div>
+        <div class="config-group">
+          <label class="config-label">
+            Impact Parameter
+            <button class="info-btn" data-info="impact-param">ℹ️</button>
+            <span class="value-display" id="impact-display">0.0 fm</span>
+          </label>
+          <input type="range" id="impact-slider" class="config-slider" min="0" max="15" step="0.1" value="0">
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Simulation Controls</h3>
+        <div class="control-buttons">
+          <button class="btn-primary" id="btn-collide">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>
+            COLLIDE
+          </button>
+          <div class="batch-row">
+            <button class="btn-secondary" id="btn-batch">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+              Batch Run
+            </button>
+            <select id="batch-size" class="config-select batch-select">
+              <option value="1000">×1K</option>
+              <option value="5000">×5K</option>
+              <option value="10000" selected>×10K</option>
+              <option value="50000">×50K</option>
+              <option value="100000">×100K</option>
+            </select>
+          </div>
+          <button class="btn-secondary" id="btn-reset">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 109-9"/><polyline points="3,3 3,9 9,9"/></svg>
+            Reset All
+          </button>
+        </div>
+        <div class="speed-control">
+          <label class="config-label">Replay Speed</label>
+          <input type="range" id="speed-slider" class="config-slider" min="0.1" max="5" step="0.1" value="1">
+        </div>
+        <div id="batch-progress" class="batch-progress hidden">
+          <div class="progress-label"><span id="batch-progress-text">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="batch-progress-fill"></div></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center: Visualization -->
+    <section id="center-panel" style="position:relative">
+      <div id="viz-container">
+        <div id="viz-toolbar">
+          <div class="viz-toggle">
+            <button class="viz-btn active" id="btn-3d">3D</button>
+            <button class="viz-btn" id="btn-2d">2D</button>
+          </div>
+          <div class="viz-options">
+            <label class="toggle-label"><input type="checkbox" id="show-tracks" checked> Tracks</label>
+            <label class="toggle-label"><input type="checkbox" id="show-jets" checked> Jets</label>
+            <label class="toggle-label"><input type="checkbox" id="show-detector" checked> Detector</label>
+            <label class="toggle-label"><input type="checkbox" id="show-labels"> Labels</label>
+          </div>
+          <div class="viz-info">
+            <span id="viz-fps">60 FPS</span>
+            <button class="icon-btn-sm" id="btn-screenshot" title="Screenshot">📸</button>
+            <button class="icon-btn-sm" id="btn-fullscreen" title="Fullscreen">⛶</button>
+          </div>
+        </div>
+        <canvas id="collision-canvas"></canvas>
+        <div id="threejs-container"></div>
+        <div id="collision-overlay">
+          <div class="beam-indicator left">Beam 1 →</div>
+          <div class="beam-indicator right">← Beam 2</div>
+        </div>
+        <div id="event-info-overlay">
+          <div id="event-summary"></div>
+        </div>
+      </div>
+
+      <!-- Bottom Charts Area -->
+      <div id="charts-container">
+        <div class="charts-tabs">
+          <button class="chart-tab active" data-chart="pt">p<sub>T</sub> Distribution</button>
+          <button class="chart-tab" data-chart="eta">Pseudorapidity (η)</button>
+          <button class="chart-tab" data-chart="mass">Invariant Mass</button>
+          <button class="chart-tab" data-chart="phi">Angular (φ)</button>
+          <button class="chart-tab" data-chart="met">Missing E<sub>T</sub></button>
+          <button class="chart-tab" data-chart="mult">Multiplicity</button>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-main"></canvas>
+          <div class="chart-controls">
+            <button class="icon-btn-sm" id="btn-chart-zoom" title="Reset Zoom">🔍</button>
+            <button class="icon-btn-sm" id="btn-chart-export" title="Export Data">💾</button>
+            <button class="icon-btn-sm" id="btn-chart-info" title="Explain Chart">ℹ️</button>
+          </div>
+        </div>
+        <button class="btn-analyze" id="btn-analyze-graph">📊 Analyze This Graph</button>
+        <div id="graph-analysis"><h4 id="graph-analysis-title"></h4><p id="graph-analysis-text"></p></div>
+      </div>
+    </section>
+
+    <!-- Right Sidebar: Analytics & Detector -->
+    <aside id="right-panel" class="panel" style="position:relative">
+      <button class="panel-collapse-btn" id="collapse-right" title="Collapse">▶</button>
+      <div class="panel-section">
+        <h3 class="section-title">
+          Detector
+          <button class="info-btn" data-info="detector">ℹ️</button>
+        </h3>
+        <div class="btn-group" id="detector-group">
+          <button class="btn-option active" data-value="CMS">CMS</button>
+          <button class="btn-option" data-value="ATLAS">ATLAS</button>
+        </div>
+        <div id="detector-specs" class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-label">B Field</span>
+            <span class="spec-value" id="spec-bfield">3.8 T</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Length</span>
+            <span class="spec-value" id="spec-length">21.6 m</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Diameter</span>
+            <span class="spec-value" id="spec-diameter">14.6 m</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Weight</span>
+            <span class="spec-value" id="spec-weight">14,000 t</span>
+          </div>
+        </div>
+        <button class="btn-secondary full-width" id="btn-explore-detector">
+          🔬 Explore Detector Layers
+        </button>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Event Analytics</h3>
+        <div id="analytics-grid" class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-label">Particles</span>
+            <span class="spec-value" id="stat-particles">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Jets</span>
+            <span class="spec-value" id="stat-jets">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Σ E<sub>T</sub></span>
+            <span class="spec-value" id="stat-et">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">MET</span>
+            <span class="spec-value" id="stat-met">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Charged</span>
+            <span class="spec-value" id="stat-charged">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Neutral</span>
+            <span class="spec-value" id="stat-neutral">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">
+          🔎 Detected Particles
+          <button class="info-btn" data-info="detector">ℹ️</button>
+        </h3>
+        <div id="detected-particles-list" class="detected-list">
+          <div class="detected-empty">Run a collision to see detected particles</div>
+        </div>
+        <div class="detected-summary" id="detected-summary">
+          <div class="detected-total">
+            <span>Total Detected</span>
+            <span class="spec-value" id="total-detected">0</span>
+          </div>
+          <div class="detected-total">
+            <span>Detection Efficiency</span>
+            <span class="spec-value" id="detection-efficiency">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">🧲 Detector Response</h3>
+        <div id="detector-response-grid" class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-label">Tracker Hits</span>
+            <span class="spec-value" id="resp-tracker">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">ECAL Deposits</span>
+            <span class="spec-value" id="resp-ecal">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">HCAL Deposits</span>
+            <span class="spec-value" id="resp-hcal">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Muon Hits</span>
+            <span class="spec-value" id="resp-muon">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">
+          Anomaly Detector
+          <button class="info-btn" data-info="anomaly">ℹ️</button>
+        </h3>
+        <div id="anomaly-status" class="anomaly-idle">
+          <span class="anomaly-icon">🔍</span>
+          <span>Awaiting collision data...</span>
+        </div>
+        <div id="anomaly-results"></div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">🏆 Challenges</h3>
+        <div id="challenges-list">
+          <div class="challenge-item" data-challenge="higgs">
+            <span class="challenge-status">○</span>
+            <span>Find the Higgs boson (125 GeV)</span>
+          </div>
+          <div class="challenge-item" data-challenge="z-boson">
+            <span class="challenge-status">○</span>
+            <span>Discover the Z boson peak</span>
+          </div>
+          <div class="challenge-item" data-challenge="top-quark">
+            <span class="challenge-status">○</span>
+            <span>Reconstruct a top quark</span>
+          </div>
+          <div class="challenge-item" data-challenge="jet-event">
+            <span class="challenge-status">○</span>
+            <span>Generate a 4-jet event</span>
+          </div>
+          <div class="challenge-item" data-challenge="anomaly-find">
+            <span class="challenge-status">○</span>
+            <span>Detect an anomalous signal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Saved Experiments</h3>
+        <div id="saved-experiments">
+          <p class="empty-state">No saved experiments yet</p>
+        </div>
+        <button class="btn-secondary full-width" id="btn-export-data">📊 Export Dataset (CSV)</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Status Footer Bar -->
+  <footer id="status-bar">
+    <div class="status-left">
+      <span class="status-item">⚛️ Discover Physics — LHC Simulator</span>
+      <span class="status-divider">|</span>
+      <span class="status-item" id="footer-detector">CMS Detector</span>
+      <span class="status-divider">|</span>
+      <span class="status-item" id="footer-energy">√s = 13.6 TeV</span>
+    </div>
+    <div class="status-center">
+      <span class="status-item" id="footer-batch-status">Ready</span>
+    </div>
+    <div class="status-right">
+      <span class="status-item" id="footer-events">Events: 0</span>
+      <span class="status-divider">|</span>
+      <span class="status-item" id="footer-memory">Memory: OK</span>
+      <span class="status-divider">|</span>
+      <span class="status-item" id="footer-time"></span>
+    </div>
+  </footer>
+  </div><!-- end #simulator-page -->
+
+  <!-- AI Assistant Panel -->
+  <div id="assistant-panel" class="assistant-hidden">
+    <div class="assistant-header">
+      <div class="assistant-title">
+        <span class="assistant-avatar">🤖</span>
+        <span>Particle Physics AI Assistant</span>
+      </div>
+      <button class="icon-btn" id="btn-close-assistant">✕</button>
+    </div>
+    <div id="assistant-messages">
+      <div class="msg bot">
+        <div class="msg-content">
+          <p>Hello! I'm your AI physics assistant. I can help you:</p>
+          <ul>
+            <li>Explain physics concepts and formulas</li>
+            <li>Interpret your simulation results</li>
+            <li>Identify resonance peaks in mass spectra</li>
+            <li>Guide you through experiments</li>
+          </ul>
+          <p>Ask me anything about particle physics!</p>
+        </div>
+      </div>
+    </div>
+    <div class="assistant-input">
+      <input type="text" id="assistant-input" placeholder="Ask about particle physics...">
+      <button id="btn-send-msg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Info Modal -->
+  <div id="info-modal" class="modal-hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="btn-close-modal">✕</button>
+      <h2 id="modal-title"></h2>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Detector Explorer Modal -->
+  <div id="detector-modal" class="modal-hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-large">
+      <button class="modal-close" id="btn-close-detector-modal">✕</button>
+      <h2>3D Detector Explorer</h2>
+      <div id="detector-3d-container">
+        <canvas id="detector-canvas"></canvas>
+      </div>
+      <div id="detector-layer-info">
+        <div class="layer-buttons">
+          <button class="layer-btn active" data-layer="all">All Layers</button>
+          <button class="layer-btn" data-layer="tracker">Tracker</button>
+          <button class="layer-btn" data-layer="ecal">ECAL</button>
+          <button class="layer-btn" data-layer="hcal">HCAL</button>
+          <button class="layer-btn" data-layer="solenoid">Solenoid</button>
+          <button class="layer-btn" data-layer="muon">Muon System</button>
+        </div>
+        <div id="layer-description"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feynman Diagram Panel -->
+  <div id="feynman-panel" class="modal-hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-large">
+      <button class="modal-close" id="btn-close-feynman">✕</button>
+      <h2>Feynman Diagram Generator</h2>
+      <div class="feynman-controls">
+        <select id="feynman-process" class="config-select">
+          <option value="ee-mumu">e⁺e⁻ → μ⁺μ⁻</option>
+          <option value="ee-qq">e⁺e⁻ → qq̄</option>
+          <option value="gg-higgs">gg → H</option>
+          <option value="qq-z">qq̄ → Z⁰</option>
+          <option value="qq-w">ud̄ → W⁺</option>
+          <option value="gg-tt">gg → tt̄</option>
+          <option value="compton">eγ → eγ (Compton)</option>
+          <option value="bhabha">e⁺e⁻ → e⁺e⁻ (Bhabha)</option>
+        </select>
+        <button class="btn-primary" id="btn-gen-feynman">Generate</button>
+      </div>
+      <canvas id="feynman-canvas" width="700" height="450"></canvas>
+      <div id="feynman-info"></div>
+    </div>
+  </div>
+
+  <!-- Education Mode Panel -->
+  <div id="education-panel" class="modal-hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-large">
+      <button class="modal-close" id="btn-close-education">✕</button>
+      <h2>📚 Educational Mode</h2>
+      <div id="edu-content">
+        <div class="edu-nav">
+          <button class="edu-nav-btn active" data-lesson="intro">Introduction</button>
+          <button class="edu-nav-btn" data-lesson="particles">Particles</button>
+          <button class="edu-nav-btn" data-lesson="forces">Forces</button>
+          <button class="edu-nav-btn" data-lesson="collisions">Collisions</button>
+          <button class="edu-nav-btn" data-lesson="detectors">Detectors</button>
+          <button class="edu-nav-btn" data-lesson="analysis">Analysis</button>
+          <button class="edu-nav-btn" data-lesson="standard_model">Standard Model</button>
+          <button class="edu-nav-btn" data-lesson="higgs">Higgs</button>
+          <button class="edu-nav-btn" data-lesson="bsm">Beyond SM</button>
+        </div>
+        <div id="edu-lesson-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toast-container"></div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-content">
+      <div class="loading-ring">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+      </div>
+      <h1>Discover <span class="accent">Physics</span></h1>
+      <p class="loading-text">Initializing Simulation Engine...</p>
+      <div class="loading-bar"><div class="loading-fill"></div></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+  <script src="js/physics.js"></script>
+  <script src="js/simulation.js"></script>
+  <script src="js/visualization.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/detector.js"></script>
+  <script src="js/feynman.js"></script>
+  <script src="js/assistant.js"></script>
+  <script src="js/education.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
